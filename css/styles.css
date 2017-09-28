@@ -1,0 +1,352 @@
+/*Header styling*/
+* {
+  box-sizing: border-box;
+}
+
+/*Nav Bar*/
+nav.main {
+  background-color: hotpink;
+  width: 100%;
+  height: 50px;
+}
+
+.nav-list {
+  margin: 15px 20px 0px;
+  display: inline-block;
+  float: right;
+}
+
+nav .name {
+  color: ghostwhite;
+  font: 1.6rem/1 Raleway, Sans-Serif;
+  padding: 10px 0px 10px 80px;
+  width: 20%;
+  display: inline-block;
+  float: left;
+}
+
+.nav-link {
+  display: inline;
+  padding: 10px 10px;
+  width: auto;
+}
+
+a.nav {
+  color: ghostwhite;
+}
+
+a.nav:hover {
+  color: black;
+}
+
+a.nav:active {
+  color: gray;
+}
+
+/*Intro Styling*/
+.header-list li {
+  text-align: center;
+  display: inline-block;
+}
+
+.intro, .games, .coding, .social-justice, .music {
+  text-align: center;
+  background-color: black;
+  color: floralwhite;
+  padding: 0px 0px 20px;
+  height: 501.77px;
+}
+
+.intro img, .games img, .music img, .coding img, .social-justice img {
+  margin: 10px 0px 30px;
+  border-radius:50%;
+  border: 4px solid hotpink;
+  transition: all .8s;
+}
+
+.intro img {
+  width: 200px;
+  height: 266.66px;
+}
+
+.games img {
+  width: 422.312px;
+  height: 266.66px;
+}
+
+.music img {
+  width: 299.505px;
+  height: 266.66px;
+}
+
+.coding img {
+  width: 375.577px;
+  height: 266.66px;
+}
+
+.social-justice img {
+  width: 187.419px;
+  height: 266.66px;
+}
+
+.intro img:hover, .games img:hover, .music img:hover, .coding img:hover,
+.social-justice img:hover {
+  -ms-transform: rotate(360deg) scale(1.2);
+  -webkit-transform: rotate(360deg) scale(1.2);
+  transform: rotate(360deg) scale(1.2);
+}
+
+div.intro h1 {
+  margin: 0px 0px 35px;
+  padding-top: 20px;
+}
+
+/*Body Styling*/
+body {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  font-family: Cambria Arial Sans-serif;
+}
+
+main {
+  background-color: #b3b3b3;
+  display: block;
+}
+
+div {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+p {
+  display: inline-block;
+  text-align: justify;
+  font-size: 16px;
+}
+
+h1 {
+  font: 4rem/1 Cambria, Arial, Sans-Serif;
+}
+
+h2 {
+  font: 3rem/1 Cambria, Arial, Sans-Serif;
+  text-shadow: 2px 2px 2px gray;
+  margin: 0px;
+  padding: 20px 0px 20px;
+  width: 100%;
+}
+
+blockquote {
+  font: italic 1.2rem/1 Cambria, Arial, Sans-Serif;
+}
+
+/*Home Page*/
+
+.card {
+  text-align: center;
+  background-color: cornsilk;
+  display: block;
+  border-bottom: 4px groove hotpink;
+  width: 45%;
+  min-height: 300px;
+  padding: 10px 2.5% 40px 2%;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-bottom:4px groove black;
+}
+
+.background-card {
+  float: left;
+  margin: 40px 1% 40px 3%;
+  border-top-left-radius: 30%;
+}
+
+.goals {
+  float: right;
+  margin: 40px 3% 40px 1%;
+  border-top-right-radius: 30%;
+}
+
+.groups:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.card-table {              /* Table  */
+  width: 60%;
+  display: inline;
+}
+
+.card-table th {
+  padding: 0px 5px;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+  border: 1px bevel black;
+}
+
+.card-table tr:nth-child(odd) th {
+  background: black;
+  color: cornsilk;
+}
+
+.card-table tr:nth-child(even) th {
+  background: hotpink;
+}
+
+.card-table td {
+  padding: 5px;
+  max-width: 30%;
+  font-size: 1rem;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.card p {
+  margin-top: 0px;
+  vertical-align: top;
+}
+
+.column-1 {
+  width: 50%;
+  padding: 30px 5px 0px;
+  margin: 0px;
+  display: inline-block;
+  float: left;
+  text-align: center;
+}
+
+.column-2 {
+  width: 45%;
+  padding: 0px 5px;
+  margin: 0px;
+  display: inline-block;
+  float: right;
+  text-align: center;
+}
+
+.columns ul {
+  margin-left: 10px;
+}
+
+#goals-list {
+  margin-top: -10px;
+  margin-bottom: 0px;
+  list-style: none;
+  text-align: center;
+  padding: 0px;
+}
+
+#goals-list li {
+  padding: 3px 0px;
+  margin: 4px 0px 0px 5%;
+  background: hotpink;
+  width: 90%;
+  border-radius: 25px;
+}
+
+#goals-list li:nth-child(odd) {
+  background: black;
+  color: cornsilk;
+}
+
+/*Cassie*/
+#Cassie-wrapper:hover {
+  cursor: pointer;
+}
+
+#Cassie {
+  z-index: 100;
+}
+
+.off {             /*This is a dummy class that tells the JS whether or not the image is 'on'*/
+}
+
+.hidden {
+  display: none;
+}
+
+/*Coding Page*/
+.coding-projects {
+  text-align: center;
+  background-color: cornsilk;
+  display: block;
+  border-bottom: 4px groove hotpink;
+  border-radius: 10%;
+  width: 45%;
+  padding: 10px 2.5% 40px 2%;
+  margin: 40px 27.5% 40px;
+  -webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */
+   -moz-animation: fadein 5s; /* Firefox < 16 */
+    -ms-animation: fadein 5s; /* Internet Explorer */
+     -o-animation: fadein 5s; /* Opera < 12.1 */
+        animation: fadein 5s;
+}
+
+/*Music Page*/
+.little-thief {
+  text-align: center;
+  background-color: cornsilk;
+  display: block;
+  border-bottom: 4px groove hotpink;
+  border-radius: 10%;
+  width: 45%;
+  height: auto;
+  padding: 10px 2.5% 40px 2%;
+  margin: 40px 27.5% 40px;
+  overflow: hidden;
+}
+
+
+/*Link Styling*/
+a {
+  font: 1.2em/1 pink Raleway, Arial, Sans-Serif;
+  color: hotpink;
+  text-decoration: none;
+  padding: 0px 10px;
+}
+
+a:hover {
+  color: deeppink;
+}
+
+a:active {
+  color: red;
+}
+
+/*Fade-In Effect*/
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

@@ -1,0 +1,25 @@
+#canvas {
+  margin: auto auto 50px;
+  position: relative;
+  text-align: center;
+  display: block;
+  overflow: hidden;
+  border: 2px solid hotpink;
+}
+
+body {
+  background-color: #b3b3b3;
+}
+
+.shield {
+  text-align: center;
+  background-color: cornsilk;
+  display: block;
+  border-bottom: 4px groove hotpink;
+  border-radius: 10%;
+  width: 45%;
+  height: auto;
+  padding: 10px 2.5% 40px 2%;
+  margin: 40px 27.5% 40px;
+  overflow: hidden;
+}
