@@ -80,7 +80,7 @@ $(document).ready(function() {
     else if (direction == 'up') ny--;
     else if (direction == 'down') ny++;
 
-    if (nx == -1 || nx > w/cw || ny == -1 || ny > h/cw || check_collision(nx, ny, snake_array)) //Collision detection
+    if (nx == -1 || nx == w/cw || ny == -1 || ny == h/cw || check_collision(nx, ny, snake_array)) //Collision detection
     {
       init();
       return;
