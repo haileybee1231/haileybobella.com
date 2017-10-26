@@ -9,7 +9,7 @@
   <body>
     <header>
       <nav class="main">
-        <a class="nav name" href=index.html>Welcome.</a>
+        <a class="nav name" href=home>Welcome.</a>
           <ul class='nav-list'>
             <li class="nav-link"><a class="nav" href="coding.html">Coding</a></li>
             <li class="nav-link"><a class="nav" href="music.html">Music</a></li>
