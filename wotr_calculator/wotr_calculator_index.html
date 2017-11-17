@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type='text/javascript'></script>
+    <link rel='stylesheet' href='css/wotr_calculator_styles.css'>
+    <link rel='stylesheet' href='../css/styles.css'>
+    <title>War of The Ring Calculator!</title>
+  </head>
+  <body>
+    <header>
+      <nav class="main">
+        <a class="nav name" href=index.html>Welcome.</a>
+          <ul class='nav-list'>
+            <li class="nav-link"><a class="nav" href="../coding.html">Coding</a></li>
+            <li class="nav-link"><a class="nav" href="../music.html">Music</a></li>
+            <li class="nav-link"><a class="nav" href="../socialjustice.html">Social Justice</a></li>
+            <li class="nav-link"><a class="nav" href="../games.html">Games</a></li>
+          </ul>
+      </nav>
+    </header>
+    <main>
+      <div id = "background">
+        <div id = "title">
+          <h1>Hailey's Fellowship Calculator</h1>
+          <h3>A Tool for Use with War of The Ring, 2nd Ed.</h3>
+        </div>
+        <div class = "text-center" id = "calc">
+          <form id = "input">
+            <div class="form-group">
+              <p>Fellowship in Mordor?</p>
+              <label for="mordor"><input id="mordorChoiceY" name="mordor" choice="yes" type="radio">Yes</label>
+              <label for="not"><input type="radio" id="mordorChoiceN" name="mordor" choice="no" checked = "checked">No</label>
+            </div>
+            <div class = "form-group">
+              <div class = "form-group">
+              <label for = "eyes">Number of Eyes in Hunt Box?</label>
+                <select class = "form-control" name = "eyes" id = "eyes">
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                </select>
+              </div>
+              <div class = "form-group">
+              <label for = "freePeoples">Number of Free Peoples Dice in Hunt Box?</label>
+                <select class = "form-control" name = "freePeoples" id = "freePeoples">
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5+</option>
+                </select>
+              </div>
+            </div>
+            <div id = "modifiers">
+              <div class = "form-group">
+                <p>Nazgul in Same Region as Fellowship?</p>
+                <label for = "nazgul"><input id = "nazgulY" name = "nazgul" type = "radio" choice = "yes">Yes</label>
+                <label for = "nazgul"><input id = "nazgulN" name = "nazgul" type = "radio" choice = "no" checked = "checked">No</label>
+              </div>
+              <div class = "form-group">
+                <p>Shadow Armies in Same Region as Fellowship?</p>
+                <label for = "armies"><input id = "armiesY" name = "armies" type = "radio" choice = "yes">Yes</label>
+                <label for = "armies"><input id = "armiesN" name = "armies" type = "radio" choice = "no" checked = "checked">No</label>
+              </div>
+              <div class = "form-group">
+                <p>Fellowship Revealed Moving Through Shadow Stronghold?</p>
+                <label for = "stronghold"><input id = "strongholdY" name = "stronghold" type = "radio" choice = "yes">Yes</label>
+                <label for = "stronghold"><input id = "strongholdN" name = "stronghold" type = "radio" choice = "no" checked = "checked">No<label>
+              </div>
+            </div>
+          </form>
+          <div id = "output">
+            <h3>Chance of Discovery</h3>
+              <button id = "calculate">Calculate</button>
+              <div id = "chance"></div>
+          </div>
+          <div id = "quote">
+            <p class = "hidden"></p>
+          </div>
+        </div>
+      </div>
+      <script src = "js/wotr_calculator_settings.js"></script>
+  </main>
+</body>

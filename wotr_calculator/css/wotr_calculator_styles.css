@@ -1,0 +1,163 @@
+div, form {
+  border-radius: 20px;
+  padding: 10px;
+}
+
+h1, h3 {
+  font-family: anironregular !important;
+}
+
+#background {
+  background-color: black;
+  border-radius: 0px;
+}
+
+.form-group, label {
+  padding: 4px;
+}
+
+.hidden {
+  display: none;
+}
+
+#calc {
+  width: 60%;
+  background-color: wheat;
+  margin: 30px;
+}
+
+#calc p, #calc label {
+  font-family: ringbearermedium;
+  font-size: 18px;
+  margin: 4px;
+}
+
+#quote p {
+  max-width: 60%;
+  text-align: center;
+  font-family: hobbiton_brushhahobbitonbrush;
+  font-size: 24px;
+}
+
+#title {
+  background-color: white;
+  width: 60%;
+  margin: 30px 30px 0px;
+}
+
+#eyes, #freePeoples {
+  max-width: 60px;
+  margin: auto;
+}
+
+#input {
+  display: block;
+  margin: auto;
+  padding: 5px;
+  width: 75%;
+}
+
+#output {
+  background-color: black;
+  color: white;
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+  width: 40%;
+  border: 2px solid green;
+  font-size: 1rem;
+}
+
+#modifiers {
+  background-color: lightgray;
+  color: black;
+  border: 2px solid black;
+  width: 100%;
+  margin: auto;
+}
+
+#chance {
+  color: black;
+  background-color: white;
+  width: 25%;
+  text-align: right;
+  margin: 10px;
+  padding: 2px;
+}
+
+#calculate {
+  height: 25px;
+  background-color: white;
+  border: white;
+  color: black;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#calculate:hover {
+  background-color: gray;
+}
+
+/*==Media Queries==*/
+@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+
+
+@media screen and (max-width: 650px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+
+
+/*==Fonts==*/
+@font-face {
+    font-family: 'anironbold';
+    src: url('../fonts/anirb___-webfont.ttf') format('truetype'),
+         url('../fonts/anirb___-webfont.woff2') format('woff2'),
+         url('../fonts/anirb___-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'anironregular';
+    src: url('../fonts/anirm___-webfont.ttf') format('truetype'),
+         url('../fonts/anirm___-webfont.woff2') format('woff2'),
+         url('../fonts/anirm___-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'hobbiton_brushhahobbitonbrush';
+    src: url('../fonts/hobbitonbrushhand-webfont.ttf') format('truetype'),
+         url('../fonts/hobbitonbrushhand-webfont.woff2') format('woff2'),
+         url('../fonts/hobbitonbrushhand-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ringbearermedium';
+    src: url('../fonts/ringm___-webfont.woff2') format('woff2'),
+         url('../fonts/ringm___-webfont.woff') format('woff'),
+         url('../fonts/ringm___-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
