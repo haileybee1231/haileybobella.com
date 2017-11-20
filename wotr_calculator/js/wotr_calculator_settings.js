@@ -29,11 +29,10 @@ $(document).ready(function() {
       chance.text(100 + '%');
     } else if (eyes === 0) {
       chance.text(0 + '%');
-    } else {                                                   //If not in Mordor
-      chance.text((((possibilities - Math.round(               //Sets chance percentage equal to number of possibilities
-        Math.pow(((5 - modifiers) / 6), eyes + rerolls)        //minus the rounded number of successes to the power of how many dice there are
-        * possibilities))                                      //multiplies that number by the number of possibilities
-        / possibilities) * 100).toFixed(2) + '%');             //the finally takes the inverse of that number and turns it into a decimal
+    } else {                                                                    //If not in Mordor
+      chance.text((((possibilities - Math.round(                                //Sets chance percentage equal to number of possibilities
+        Math.pow(((5 - modifiers) / 6), eyes + rerolls)                         //minus the rounded number of successes to the power of how many dice there are
+        * possibilities)) / possibilities) * 100).toFixed(2) + '%');            //multiplies that number by the number of possibilities, then finally takes the inverse of that number and turns it into a decimal
     };
     quote();
   });
