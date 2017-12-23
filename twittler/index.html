@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hailey's Twittler</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="jquery.js"></script>
+    <script src="data_generator.js"></script>
+    <script src="jquery.timeago.js"></script>
+  </head>
+  <style>
+  /*      GENERAL STYLING     */
+    body {
+      background-color: gray;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      margin: 10px 10px 0;
+      min-width: 120px;
+    }
+
+    .panel-body {
+      min-height: 70px;
+    }
+
+    h1 {
+      margin: 40px 0 10px;
+      color: white;
+    }
+
+    #main-tweets {
+      padding: 50px;
+    }
+
+    /*      POP-UP STYLING      */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      width: 300px;
+      margin: -200px -150px;
+      padding: 20px;
+      background-color: white;
+      border: 2px solid black;
+      border-radius: 5px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    textarea {
+      border-radius: 10px;
+      height: 150px;
+      width: 250px;
+      overflow: hidden;
+    }
+
+    input[type=text] {
+      border-radius: 10px;
+      padding: 5px;
+    }
+  </style>
+  <body>
+    <span class="overlay" id="login-form">
+      <h3>You must sign in to Tweet!</h3>
+      <h2>Log In</h2>
+        <input type="text" placeholder="Username"></input><button href="#" class="btn btn-success" id="login">Submit</button>
+      <h2>Log In As Visitor</h2>
+        <button href="#" class="btn btn-info" id="visitor">Submit</button>
+    </span>
+    <span class="overlay" id="write-message">
+      <h3>Type Your Tweet</h3>
+        <textarea placeholder="Your Tweet Here"></textarea>
+        <p id="char-count">150 Characters Remaining</p>
+        <button href="#" class="btn btn-success" id="submit-tweet">Submit</button>
+        <button href="#" class="btn btn-danger" id="close">Close</button>
+    </span>
+    <div class="container text-center">
+      <h1>Hailey's Mini-Twitter</h1>
+      <h2>New Tweets: <span>0</span></h2>
+      <div class="btn btn-info" id="tweet"><i class="fa fa-twitter" aria-hidden="true"></i> Tweet</div>
+      <div class="btn btn-success" id="new">Show New</div>
+      <div class="btn btn-danger" id="hide">Hide Old</div>
+    </div>
+    <div class="container" id="main-tweets">
+      <div class="col-sm-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">test</div>
+          <div class="panel-body">test</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.visitor = undefined;                                               //Initializes visitor
+      var hidden = false;                                                       //Boolean variable to define hide behavior
+      var singleUser = false;                                                   //Tracks whether or not single user is already displayed
+
+      $(document).ready(function() {
+
+        function initialize() {                                                 //Create initial divs
+          var $tweetHeaders = $('#main-tweets').find('.panel-heading');         //Throughout script below, all enumeration variables have to be created anew for each scope
+          var totalTweets = streams.home.length - 1;
+          for (let i = 0 ; i < totalTweets ; i++) {
+            $('#main-tweets').prepend($('#main-tweets').find('.col-sm-4').first().clone());
+          }
+          populate();
+        }
+
+        function populate() {                                                   //Populates initial tweets
+          var $tweetHeaders = $('#main-tweets').find('.panel-heading');
+          var $tweetBodies = $('#main-tweets').find('.panel-body');
+
+          $($tweetHeaders).map(index => {                                       //Populates headers w/ timestamps
+            var totalTweets = streams.home.length - 1;
+            var tweet = streams.home[index];
+            $($tweetHeaders[totalTweets - index]).hide().html(`@<a class="user" href="#">${tweet.user}</a>; <span class='timestamp'>${$.timeago(tweet.created_at)}</span>`).fadeTo('slow', 1);
+          });
+
+          $($tweetBodies).map(index => {                                        //Populates bodies
+            var totalTweets = streams.home.length - 1;
+            var tweet = streams.home[index];
+            $($tweetBodies[totalTweets - index]).hide().text(`${tweet.message}`).fadeTo('slow', 1);
+          });
+        }
+
+        function updateTimestamps() {                                           //Keeps timestamps current
+          var timestamps = $('#main-tweets').find('.timestamp');
+          var totalTweets = streams.home.length - 1;                            //Total tweets generated (can be greater than on-screen tweets)
+          var visibleTweets = $('#main-tweets').find('.panel-heading').length - 1;  //Total tweets currently on screen (including hidden)
+          var diff = totalTweets - visibleTweets;                               //Difference between two totals
+          $(timestamps).each(index => {                                         //Works through on-screen tweet timestamps
+            var tweet = streams.home[totalTweets - diff - index];               //Since first tweet is actually newest, works from newest onscreen tweet to oldest
+            $(timestamps[index]).text($.timeago(tweet.created_at));             //Sets timestamp
+          });
+        }
+
+        function showUserTimeline(user) {                                       //Function to show one user's tweets
+          var $tweetHeaders = $('#main-tweets').find('.panel-heading');
+          var tweets = $('#main-tweets').find('.col-sm-4');
+          if (!singleUser) {
+            $($tweetHeaders).each(index => {                                    //Iterates through all headers
+              if ($($tweetHeaders[index]).text().indexOf(user) == -1) {         //If username is in header,
+                $(tweets[index]).fadeOut();                                     //Fade tweet out
+              }
+            });
+            $('#hide').text('Show Hidden')                                      //Changes button text
+            hidden = true;                                                      //Toggle Boolean value of hidden state
+            singleUser = true;
+          } else if (hidden) {
+            hide();
+            singleUser = false;
+          }
+        }
+
+        function checkForNew() {                                                //Checks for new tweets
+          var totalTweets = streams.home.length - 1;
+          var visibleTweets = $('#main-tweets').find('.panel-heading').length;
+          var diff = totalTweets - visibleTweets;
+          if (diff > 0) {                                                       //If more tweets than onscreen,
+            $('h2>span').text(diff).css('color', '#5bc0de');                    //Have counter reflect difference and display as blue
+            diff = 0;                                                           //then set internal difference to 0
+          }
+        }
+
+        function showNew() {                                                    //Displays new tweetss (without content)
+          var totalTweets = streams.home.length - 1;
+          var visibleTweets = $('#main-tweets').find('.panel-heading').length - 1;
+          var diff = totalTweets - visibleTweets;                               //Sets how many new tweets to be added
+          var $tweetHeaders = $('#main-tweets').find('.panel-heading');
+          var $tweetBodies = $('#main-tweets').find('.panel-body');
+          if (diff <= 0) return;                                                //Since function is triggered by button, prevents firing if no new tweets
+
+          for (let i = 0 ; i < diff ; i++) {
+            $('#main-tweets').prepend($('#main-tweets').find('.col-sm-4').first().clone().fadeTo('slow', 1));
+          }
+          for (let i = 0 ; i < diff ; i++) {                                    //Once panels are on screen, populates from newest to oldest new tweet
+            populateNew(i);
+          }
+          $('h2>span').text(0).css('color', 'black');                           //Rests counter number to 0 and color to black
+        }
+
+        function populateNew(num) {                                             //Populates new tweet info, based on index passed in from loop
+          var totalTweets = streams.home.length - 1;
+          var $tweetHeaders = $('#main-tweets').find('.panel-heading');
+          var $tweetBodies = $('#main-tweets').find('.panel-body');
+          var tweet = streams.home[totalTweets - num];                          //Current tweet, working from most recent
+          $($tweetHeaders[num]).html(`@<a class='user' href='#'>${tweet.user}</a>; <span class='timestamp'>${$.timeago(tweet.created_at)}</span>`);
+          $($tweetBodies[num]).text(`${tweet.message}`);
+        }
+
+        function hide() {                                                       //Triggered by button, hides all but 10 newest tweets
+          var tweets = $('#main-tweets').find('.col-sm-4');
+          var visibleTweets = tweets.length;
+          if (!hidden) {                                                        //If not yet hidden,
+            for (i = 10 ; i < visibleTweets ; i++) {                            //for all but ten newest tweets,
+              $(tweets[i]).fadeOut();                                           //fade out tweets
+            }
+            $(this).text('Show Hidden')                                         //Changes button text
+          } else if (hidden) {                                                  //If already hidden,
+            $(tweets).each(index => {
+              if ($(tweets[index]).css('display') == 'none') {                  //Display all tweets
+                $(tweets[index]).fadeIn();
+              }
+            });
+            $('#hide').text('Hide Old');                                        //Revert button text
+          }
+          hidden = !hidden;                                                     //Toggle Boolean state on every button press regardless of path taken
+          singleUser = false;                                                   //Any time hide runs, a single user is not displayed, so reset
+        }
+
+        function tweet() {                                                      //Allows user to tweet
+          if (!window.visitor) {                                                //If visitor parameter has not yet been set,
+            $('#login-form').slideToggle();                                     //Bring login form into view and define button functionality
+            $('#login').click(login);
+            $('#visitor').click(visitor);
+          } else {                                                              //If user has logged in already,
+            var message = $('#write-message').find('textarea');
+            message.val('');                                                    //Set input to empty to receive new tweet
+
+            $('#write-message').slideToggle();                                  //bring in new window
+            $(message).on('keyup', function() {                                 //Function that renders remaining characters out of 150
+              $('#char-count').text(`${tweetLength(message.val())}`);
+            });
+
+            $('#submit-tweet').one('click', function() {                        //Submits tweet, uses .one instead of .on to avoid multiple calls
+              if (message.val().length >= 150 || message.val().length == 0) {   //as long as tweet is not empty or over 150 chars
+                alert('Tweet must be within 1 and 150 characters.');
+                return;
+              } else {
+                writeTweet(message.val());                                      //uses function from data_generator.js
+                checkForNew();                                                  //immediately update count number
+                $('#write-message').slideToggle();
+              }
+            });
+          }
+        }
+
+        function login() {                                                      //If user clicks log in button on form
+          var username = $(':text').val();                                      //Selects text element
+          if (!$(':text').val()) {
+            alert('Please enter your username!');
+          } else {
+            window.visitor = username;                                          //Sets visitor property to user defined parameter
+            streams.users[username] = [];                                       //and creates array for tweets
+            $('#login').text('Signed in!');
+            $('#login-form').delay('500').slideToggle();
+          }
+        }
+
+        function visitor() {                                                    //If user clicks visitor button,
+          window.visitor = 'visitor';                                           //sets parameter to generic "visitor"
+          streams.users.visitor = [];
+          $('#visitor').text('Signed in as visitor!');
+          $('#login-form').delay('500').slideToggle();
+        }
+
+        function tweetLength(tweet) {                                           //Helper function to determine tweet length
+          if (tweet.length >= 150) {
+            return 'Character limit exceeded.'
+          }
+          if (tweet.length >= 135) {
+            $('#char-count').css('color', 'red');
+          } else {
+            $('#char-count').css('color', 'black');
+          }
+          return `${150 - tweet.length} Characters Remaining`;
+        }
+
+        initialize();                                                           //Initializes upon page load
+        setInterval(updateTimestamps, 60000);                                   //Checks timestamps every minute
+        setInterval(checkForNew, 1000);                                         //Checks for new tweets every second
+        $('#new').click(showNew);                                               //New Tweet button shows new tweets
+        $('#hide').click(hide);                                                 //Hide button toggles hide state
+        $('#tweet').click(tweet);                                               //Tweet buton allows user to tweet
+        $('#close').click(function() {                                          //Clsoe button for write-message form
+          $('#write-message').slideToggle();
+        });
+        // $('.user').click(function() {
+        //   showUserTimeline($(this).text());
+        // });
+        $(document).on('click', '.user', function() {
+          showUserTimeline($(this).text());
+        });
+
+      });
+
+    </script>
+  </body>
+</html>
